@@ -64,17 +64,79 @@ body {
   overflow: hidden;
 }
 
+/* Floating shapes background */
+body::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -150px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: morphShape 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -100px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morphShape 25s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes morphShape {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(180deg) scale(1.1);
+  }
+}
+
 .card {
   background: #ffffff;
-  padding: 48px 40px;
-  border-radius: 16px;
+  padding: 56px 48px;
+  border-radius: 24px;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    0 32px 80px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   position: relative;
   animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+/* Decorative corner accents */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+  background-size: 200% 100%;
+  border-radius: 24px 24px 0 0;
+  animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .card {
@@ -92,24 +154,28 @@ body {
 
 /* Card Header */
 .card-header {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  text-align: center;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 8px;
-  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
 .subtitle {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: #64748b;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* Form Styles */
@@ -139,9 +205,9 @@ input[type="email"],
 input[type="password"],
 input[type="text"] {
   width: 100%;
-  padding: 13px 16px;
+  padding: 14px 18px;
   border: 2px solid #e2e8f0;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 0.9375rem;
   font-weight: 500;
   color: #0f172a;
@@ -163,8 +229,10 @@ input[type="password"]:focus,
 input[type="text"]:focus {
   border-color: #667eea;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-  transform: translateY(-1px);
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.1),
+    0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
 }
 
 input.error-field {
@@ -244,16 +312,16 @@ input.error-field ~ .error-msg {
 /* Buttons */
 .btn-primary {
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 24px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 0.9375rem;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -261,8 +329,10 @@ input.error-field ~ .error-msg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  gap: 10px;
+  box-shadow: 
+    0 8px 20px rgba(102, 126, 234, 0.4),
+    0 4px 8px rgba(102, 126, 234, 0.2);
 }
 
 .btn-arrow {
@@ -270,16 +340,18 @@ input.error-field ~ .error-msg {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 28px rgba(102, 126, 234, 0.5),
+    0 6px 12px rgba(102, 126, 234, 0.3);
 }
 
 .btn-primary:hover .btn-arrow {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 .btn-primary.loading {
@@ -375,20 +447,20 @@ input.error-field ~ .error-msg {
 
 /* Footer */
 .card-footer {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid #f1f5f9;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 2px solid #f1f5f9;
   text-align: center;
   animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
 }
 
 .card-footer .link-primary {
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .footer-text {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: #64748b;
   font-weight: 500;
 }
@@ -396,7 +468,7 @@ input.error-field ~ .error-msg {
 .link-primary {
   color: #667eea;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
@@ -404,11 +476,11 @@ input.error-field ~ .error-msg {
 .link-primary::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -3px;
   left: 0;
   width: 0;
   height: 2px;
-  background: #667eea;
+  background: linear-gradient(90deg, #667eea, #764ba2);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -424,16 +496,18 @@ input.error-field ~ .error-msg {
 .success-banner {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 24px;
-  font-size: 0.875rem;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+  box-shadow: 
+    0 8px 20px rgba(16, 185, 129, 0.4),
+    0 4px 8px rgba(16, 185, 129, 0.2);
   animation: successSlide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: none;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .success-banner svg {
@@ -441,9 +515,82 @@ input.error-field ~ .error-msg {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+  body::before {
+    width: 400px;
+    height: 400px;
+    top: -150px;
+    right: -100px;
+  }
+
+  body::after {
+    width: 350px;
+    height: 350px;
+    bottom: -100px;
+    left: -75px;
+  }
+}
+
 @media (max-width: 520px) {
+  body {
+    padding: 16px;
+  }
+
   .card {
-    padding: 40px 32px;
+    padding: 44px 32px;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  .subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .card-header {
+    margin-bottom: 32px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 13px 16px;
+    font-size: 0.9375rem;
+  }
+
+  .password-wrapper input {
+    padding-right: 48px !important;
+  }
+
+  .btn-primary {
+    padding: 15px 22px;
+    font-size: 0.9375rem;
+  }
+
+  .card-footer {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+
+  .footer-text {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 36px 28px;
   }
 
   h1 {
@@ -453,54 +600,139 @@ input.error-field ~ .error-msg {
   .subtitle {
     font-size: 0.875rem;
   }
+
+  .card-header {
+    margin-bottom: 28px;
+  }
+
+  label {
+    font-size: 0.8125rem;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 12px 14px;
+    font-size: 0.875rem;
+  }
+
+  .password-wrapper input {
+    padding-right: 44px !important;
+  }
+
+  .password-toggle {
+    right: 6px;
+  }
+
+  .btn-primary {
+    padding: 14px 20px;
+    font-size: 0.875rem;
+    gap: 8px;
+  }
+
+  .error-msg {
+    font-size: 0.75rem;
+    margin-top: 6px;
+  }
+
+  .card-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+
+  .footer-text {
+    font-size: 0.8125rem;
+  }
+
+  .success-banner {
+    padding: 14px 16px;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 360px) {
   body {
-    padding: 20px;
+    padding: 8px;
   }
 
   .card {
-    padding: 36px 28px;
+    padding: 32px 24px;
+    border-radius: 16px;
   }
 
   h1 {
     font-size: 1.625rem;
   }
 
+  .subtitle {
+    font-size: 0.8125rem;
+  }
+
   .card-header {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
   }
 
   input[type="email"],
-  input[type="password"] {
-    padding: 12px 14px;
-    font-size: 0.875rem;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 13px 18px;
-    font-size: 0.875rem;
-  }
-
-  .footer-text {
+  input[type="password"],
+  input[type="text"] {
+    padding: 11px 12px;
     font-size: 0.8125rem;
+    border-radius: 10px;
+  }
+
+  .btn-primary {
+    padding: 13px 18px;
+    font-size: 0.8125rem;
+    border-radius: 10px;
   }
 }
 
-@media (max-width: 360px) {
+/* Landscape orientation for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    padding: 12px;
+  }
+
   .card {
-    padding: 32px 24px;
+    padding: 28px 32px;
+    margin: 12px auto;
+  }
+
+  .card-header {
+    margin-bottom: 20px;
   }
 
   h1 {
     font-size: 1.5rem;
   }
 
-  .divider::before,
-  .divider::after {
-    width: 34%;
+  .subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 10px 14px;
+  }
+
+  .btn-primary {
+    padding: 12px 20px;
+    margin-top: 8px;
+  }
+
+  .card-footer {
+    margin-top: 20px;
+    padding-top: 16px;
   }
 }
 
@@ -690,12 +922,21 @@ body.homepage .card p {
 
 /* Homepage Responsive */
 @media (max-width: 768px) {
-  body.homepage header {
-    padding: 14px 20px;
+  body.homepage .user-menu {
+    top: 16px;
+    right: 16px;
+    gap: 12px;
   }
 
-  body.homepage .logo {
-    font-size: 1.2rem;
+  body.homepage .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8125rem;
+  }
+
+  body.homepage .logout-btn {
+    padding: 7px 14px;
+    font-size: 0.8125rem;
   }
 
   body.homepage main {
@@ -716,24 +957,163 @@ body.homepage .card p {
 
   body.homepage .cards-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  body.homepage .card {
+    padding: 28px 24px;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  body.homepage .card h3 {
+    font-size: 1.2rem;
+  }
+
+  body.homepage .card p {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   body.homepage .user-menu {
-    gap: 12px;
+    top: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+
+  body.homepage .user-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
   }
 
   body.homepage .logout-btn {
-    padding: 7px 12px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  body.homepage main {
+    padding: 24px 16px;
+  }
+
+  body.homepage .welcome-section {
+    padding: 32px 24px;
   }
 
   body.homepage .welcome-section h1 {
-    font-size: 1.7rem;
+    font-size: 1.75rem;
+  }
+
+  body.homepage .welcome-section p {
+    font-size: 0.9375rem;
+  }
+
+  body.homepage .cards-grid {
+    gap: 16px;
   }
 
   body.homepage .card {
     padding: 24px 20px;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  body.homepage .card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  body.homepage .card p {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 360px) {
+  body.homepage .user-menu {
+    top: 10px;
+    right: 10px;
+    gap: 8px;
+  }
+
+  body.homepage .user-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  body.homepage .logout-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  body.homepage main {
+    padding: 20px 12px;
+  }
+
+  body.homepage .welcome-section {
+    padding: 28px 20px;
+  }
+
+  body.homepage .welcome-section h1 {
+    font-size: 1.5rem;
+  }
+
+  body.homepage .welcome-section p {
+    font-size: 0.875rem;
+  }
+
+  body.homepage .card {
+    padding: 20px 16px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  body.homepage .card h3 {
+    font-size: 1rem;
+  }
+
+  body.homepage .card p {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Tablet landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body.homepage main {
+    padding: 40px 32px;
+  }
+
+  body.homepage .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  body.homepage main {
+    max-width: 1400px;
+    padding: 56px 32px;
+  }
+
+  body.homepage .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
   }
 }
