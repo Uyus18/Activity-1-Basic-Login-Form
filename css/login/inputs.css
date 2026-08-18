@@ -1,0 +1,132 @@
+/* ===== LOGIN PAGE — INPUTS (form fields, labels, password toggle, error messages) ===== */
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+  animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.form-group:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.form-group:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #0f172a;
+  background: #f8fafc;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  font-family: inherit;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.1),
+    0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+input.error-field {
+  border-color: #ef4444;
+  background: #fef2f2;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.error-msg {
+  display: none;
+  color: #dc2626;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-top: 8px;
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error-msg svg {
+  flex-shrink: 0;
+}
+
+input.error-field ~ .error-msg {
+  display: flex;
+}
+
+/* Password Field */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 48px !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #64748b;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  background: #f1f5f9;
+  color: #667eea;
+}
+
+.eye-icon {
+  display: none;
+}
+
+.eye-open {
+  display: block;
+}
+
+.password-toggle.active .eye-open {
+  display: none;
+}
+
+.password-toggle.active .eye-closed {
+  display: block;
+}

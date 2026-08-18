@@ -1,0 +1,137 @@
+/* ===== LOGIN PAGE — BUTTON (primary button, secondary button, divider) ===== */
+
+/* Primary Button */
+.btn-primary {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 
+    0 8px 20px rgba(102, 126, 234, 0.4),
+    0 4px 8px rgba(102, 126, 234, 0.2);
+}
+
+.btn-arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 28px rgba(102, 126, 234, 0.5),
+    0 6px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-primary.loading {
+  pointer-events: none;
+}
+
+.btn-primary.loading .btn-text,
+.btn-primary.loading .btn-arrow {
+  opacity: 0;
+}
+
+.btn-primary.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 28px 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 38%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e2e8f0 50%, transparent);
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.divider span {
+  background: #ffffff;
+  padding: 0 12px;
+  position: relative;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  width: 100%;
+  padding: 13px 20px;
+  background: #ffffff;
+  color: #1e293b;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.btn-secondary svg {
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover svg {
+  transform: scale(1.08);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
